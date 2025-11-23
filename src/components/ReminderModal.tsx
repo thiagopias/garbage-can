@@ -42,7 +42,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({ entry, onClose }) 
         <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50">
           <h3 className="font-semibold text-gray-800 flex items-center gap-2">
             <SparklesIcon className="w-5 h-5 text-indigo-500" />
-            AI Reminder Generator
+            Gerador de Lembretes com IA
           </h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,7 +53,7 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({ entry, onClose }) 
 
         <div className="p-6 space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">Select Tone</label>
+            <label className="text-sm font-medium text-gray-700">Selecione o Tom</label>
             <div className="grid grid-cols-2 gap-2">
               {Object.values(ReminderToneValues).map((t) => (
                 <button
@@ -80,12 +80,12 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({ entry, onClose }) 
               {isLoading ? (
                 <>
                   <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Generating...
+                  Gerando...
                 </>
               ) : (
                 <>
                   <SparklesIcon className="w-4 h-4" />
-                  Generate Message
+                  Gerar Mensagem
                 </>
               )}
             </button>
@@ -93,19 +93,19 @@ export const ReminderModal: React.FC<ReminderModalProps> = ({ entry, onClose }) 
 
           {generatedText && (
             <div className="mt-4 animate-fade-in">
-              <label className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1 block">Preview</label>
+              <label className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1 block">Prévia</label>
               <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 relative group">
                 <p className="text-gray-800 text-sm leading-relaxed">{generatedText}</p>
                 <button
                   onClick={handleCopy}
                   className="absolute top-2 right-2 p-1.5 bg-white border border-gray-200 rounded-md shadow-sm text-gray-500 hover:text-indigo-600 transition-colors"
-                  title="Copy to clipboard"
+                  title="Copiar para área de transferência"
                 >
                   {isCopied ? <CheckIcon className="w-4 h-4 text-green-500" /> : <CopyIcon className="w-4 h-4" />}
                 </button>
               </div>
               <p className="text-xs text-gray-400 mt-2 text-center">
-                Copy and paste this into your building's group chat.
+                Copie e cole isso no grupo do WhatsApp do prédio.
               </p>
             </div>
           )}

@@ -1,0 +1,3 @@
+i want to deploy this app as a docker container in digital ocean droptlet.
+you can access the server via ssh "ssh mim"
+create a script to copy the application to the server's folder /opt/binduty

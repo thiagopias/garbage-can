@@ -9,22 +9,22 @@ export const generateReminderMessage = async (
 ): Promise<string> => {
   const apiKey = import.meta.env.VITE_API_KEY;
   if (!apiKey) {
-    return "Error: API Key is missing. Cannot generate reminder.";
+    return "Erro: Chave da API não encontrada. Não é possível gerar o lembrete.";
   }
 
   const ai = new GoogleGenAI({ apiKey });
 
   try {
     const prompt = `
-      Write a short, message board notice or text message for a neighbor.
+      Escreva uma mensagem curta para um grupo de WhatsApp ou aviso para vizinhos.
       
-      Context:
-      - It is the turn of "${apartmentName}" to take out the garbage for the whole building.
-      - The period is from ${startDate} to ${endDate}.
-      - The tone should be: ${tone}.
-      - Keep it under 50 words.
-      - Do not include hashtags.
-      - Just the message content.
+      Contexto:
+      - É a vez de "${apartmentName}" colocar o lixo para fora para todo o prédio.
+      - O período é de ${startDate} a ${endDate}.
+      - O tom deve ser: ${tone}.
+      - Mantenha em menos de 50 palavras.
+      - Não inclua hashtags.
+      - Apenas o conteúdo da mensagem.
     `;
 
     const response = await ai.models.generateContent({
@@ -32,9 +32,9 @@ export const generateReminderMessage = async (
       contents: prompt,
     });
 
-    return response.text?.trim() || "Could not generate message.";
+    return response.text?.trim() || "Não foi possível gerar a mensagem.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Sorry, I couldn't generate a message right now. Please try again later.";
+    return "Desculpe, não consegui gerar uma mensagem agora. Por favor, tente novamente mais tarde.";
   }
 };

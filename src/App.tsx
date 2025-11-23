@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { CurrentStatus } from './components/CurrentStatus';
 import { ScheduleList } from './components/ScheduleList';
 import { ReminderModal } from './components/ReminderModal';
 import { EmailSubscription } from './components/EmailSubscription';
 import { calculateSchedule } from './utils/dateUtils';
-import type { ScheduleEntry } from './types';
 
 const App: React.FC = () => {
-  const [schedule, setSchedule] = useState<ScheduleEntry[]>([]);
-  const [currentEntry, setCurrentEntry] = useState<ScheduleEntry | null>(null);
   const [showReminderModal, setShowReminderModal] = useState(false);
 
-  useEffect(() => {
-    // Initialize schedule based on today
-    const today = new Date();
-    const generatedSchedule = calculateSchedule(today, 0, 11); // Show current + next 11 weeks
-    setSchedule(generatedSchedule);
-    
-    // Find current week
-    const current = generatedSchedule.find(s => s.isCurrentWeek);
-    if (current) {
-      setCurrentEntry(current);
-    }
+  // Calculate schedule based on today
+  const schedule = useMemo(() => {
+    return calculateSchedule(new Date(), 0, 11); // Show current + next 11 weeks
   }, []);
+  
+  const currentEntry = useMemo(() => {
+    return schedule.find(s => s.isCurrentWeek) || null;
+  }, [schedule]);
 
   return (
     <div className="min-h-screen pb-12 bg-gray-50/50">
@@ -44,8 +37,8 @@ const App: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
           </div>
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 tracking-tight">BinDuty</h1>
-          <p className="text-gray-300 text-lg max-w-xs mx-auto font-light leading-relaxed">Weekly garbage disposal rota for the building</p>
+          <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 tracking-tight">garbagecan</h1>
+          <p className="text-gray-300 text-lg max-w-xs mx-auto font-light leading-relaxed">Rodízio semanal de coleta de lixo do prédio</p>
         </header>
 
         <main className="space-y-8">
@@ -61,8 +54,9 @@ const App: React.FC = () => {
           <EmailSubscription />
         </main>
 
-        <footer className="mt-16 text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} Building Management System</p>
+        <footer className="mt-16 text-center text-gray-500 text-sm space-y-1">
+          <p>&copy; {new Date().getFullYear()} Sistema de Gestão do Prédio</p>
+          <p className="text-gray-400">Desenvolvido por <span className="font-medium text-gray-500">Alga Smart Systems</span></p>
         </footer>
       </div>
 

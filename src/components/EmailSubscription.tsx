@@ -29,9 +29,9 @@ export const EmailSubscription: React.FC = () => {
             <div className="inline-flex items-center justify-center p-3 bg-white/20 backdrop-blur-sm rounded-xl mb-4 border border-white/10 shadow-inner">
               <MailIcon className="w-6 h-6 text-white" />
             </div>
-            <h3 className="text-2xl font-bold mb-2 tracking-tight">Get Weekly Reminders</h3>
+            <h3 className="text-2xl font-bold mb-2 tracking-tight">Receba Lembretes Semanais</h3>
             <p className="text-indigo-100 max-w-lg mx-auto lg:mx-0">
-              Never forget your turn again! Subscribe to receive email notifications when your apartment's duty week begins.
+              Nunca mais esqueça sua vez! Inscreva-se para receber notificações por email quando a semana de responsabilidade do seu apartamento começar.
             </p>
           </div>
 
@@ -41,13 +41,13 @@ export const EmailSubscription: React.FC = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-emerald-500 rounded-full mb-3 shadow-lg ring-4 ring-emerald-500/20">
                   <CheckIcon className="w-6 h-6 text-white" />
                 </div>
-                <h4 className="font-bold text-lg">Subscribed!</h4>
-                <p className="text-indigo-100 text-sm mt-1">You're all set to receive reminders.</p>
+                <h4 className="font-bold text-lg">Inscrito!</h4>
+                <p className="text-indigo-100 text-sm mt-1">Tudo pronto para receber lembretes.</p>
                 <button 
                   onClick={() => setStatus('idle')}
                   className="mt-4 text-xs font-medium text-white/70 hover:text-white underline transition-colors"
                 >
-                  Register another email
+                  Cadastrar outro email
                 </button>
               </div>
             ) : (
@@ -56,7 +56,7 @@ export const EmailSubscription: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder="Digite seu email"
                   required
                   disabled={status === 'loading'}
                   className="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 min-w-0 bg-gray-50 border border-transparent focus:bg-white transition-all"
@@ -68,7 +68,7 @@ export const EmailSubscription: React.FC = () => {
                 >
                   {status === 'loading' ? (
                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  ) : 'Subscribe'}
+                  ) : 'Inscrever-se'}
                 </button>
               </form>
             )}

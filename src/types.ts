@@ -13,10 +13,10 @@ export interface ScheduleEntry {
 }
 
 export const ReminderToneValues = {
-  Friendly: 'Friendly',
-  Professional: 'Professional',
-  Urgent: 'Urgent',
-  Funny: 'Funny'
+  Friendly: 'Amigável',
+  Professional: 'Profissional',
+  Urgent: 'Urgente',
+  Funny: 'Divertido'
 } as const;
 
 export type ReminderTone = typeof ReminderToneValues[keyof typeof ReminderToneValues];

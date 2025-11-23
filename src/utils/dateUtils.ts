@@ -17,11 +17,11 @@ export const getMonday = (date: Date): Date => {
 };
 
 export const formatDate = (date: Date): string => {
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  return date.toLocaleDateString('pt-BR', { month: 'short', day: 'numeric', year: 'numeric' });
 };
 
 export const formatDateShort = (date: Date): string => {
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return date.toLocaleDateString('pt-BR', { month: 'short', day: 'numeric' });
 };
 
 export const calculateSchedule = (targetDate: Date, weeksBefore = 2, weeksAfter = 10): ScheduleEntry[] => {
@@ -29,11 +29,13 @@ export const calculateSchedule = (targetDate: Date, weeksBefore = 2, weeksAfter 
   const currentMonday = getMonday(targetDate);
   const schedule: ScheduleEntry[] = [];
 
-  // Calculate the starting point relative to the view
-  // We want to generate a list starting from `weeksBefore` ago
+  // Filter apartments that have residents (skip empty ones)
+  const apartmentsWithResidents = APARTMENTS.filter(apt => {
+    return apt.residents && apt.residents.trim().length > 0;
+  });
   
-  const totalApartments = APARTMENTS.length;
-  
+  const totalApartments = apartmentsWithResidents.length;
+
   // Start generation loop
   for (let i = -weeksBefore; i <= weeksAfter; i++) {
     const weekStart = new Date(currentMonday.getTime() + (i * MS_PER_WEEK));
@@ -44,17 +46,21 @@ export const calculateSchedule = (targetDate: Date, weeksBefore = 2, weeksAfter 
     const diffTime = weekStart.getTime() - anchorMonday.getTime();
     const diffWeeks = Math.round(diffTime / MS_PER_WEEK);
 
-    // Calculate index. JavaScript % operator can return negative for negative inputs,
+    // Calculate index in the filtered array (only apartments with residents)
+    // JavaScript % operator can return negative for negative inputs,
     // so we handle that math carefully.
-    let aptIndex = diffWeeks % totalApartments;
-    if (aptIndex < 0) {
-      aptIndex = totalApartments + aptIndex;
+    let filteredIndex = diffWeeks % totalApartments;
+    if (filteredIndex < 0) {
+      filteredIndex = totalApartments + filteredIndex;
     }
+
+    // Get the apartment from the filtered array
+    const apartment = apartmentsWithResidents[filteredIndex];
 
     schedule.push({
       startDate: weekStart,
       endDate: weekEnd,
-      apartment: APARTMENTS[aptIndex],
+      apartment: apartment,
       isCurrentWeek: i === 0
     });
   }
