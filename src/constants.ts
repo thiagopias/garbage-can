@@ -6,11 +6,11 @@ export const ANCHOR_APT_INDEX = 0; // Apt 1 is index 0
 
 export const APARTMENTS: Apartment[] = [
   { id: 1, name: 'Apartmento 1', residents: 'Thiago and Ian', color: 'bg-emerald-100 text-emerald-800 border-emerald-200' },
-  { id: 2, name: 'Apartmento 2', residents: 'Claus Gabilan', color: 'bg-blue-100 text-blue-800 border-blue-200' },
+  { id: 2, name: 'Apartmento 2', residents: 'Paulao', color: 'bg-blue-100 text-blue-800 border-blue-200' },
   { id: 3, name: 'Apartmento 3', residents: 'Cacau and Cristal', color: 'bg-violet-100 text-violet-800 border-violet-200' },
-  { id: 4, name: 'Apartmento 4', residents: 'Luisa and Kelvin', color: 'bg-amber-100 text-amber-800 border-amber-200' },
-  { id: 5, name: 'Apartmento 5', residents: ' ', color: 'bg-rose-100 text-rose-800 border-rose-200' },
-  { id: 6, name: 'Apartmento 6', residents: 'Carol', color: 'bg-cyan-100 text-cyan-800 border-cyan-200' },
+  { id: 4, name: 'Apartmento 4', residents: 'Luisa', color: 'bg-amber-100 text-amber-800 border-amber-200' },
+  { id: 5, name: 'Apartmento 5', residents: 'Claus Gabilan', color: 'bg-rose-100 text-rose-800 border-rose-200' },
+  { id: 6, name: 'Apartmento 6', residents: 'Carol e Sagu', color: 'bg-cyan-100 text-cyan-800 border-cyan-200' },
 ];
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
